@@ -11,10 +11,11 @@ public class Evento {
             return _titolo;
         }
         set {
-            if (_titolo != "")
+            if (value == null || value == "")
             {
-                _titolo = value;
+                throw new GestoreEventiException("Il nome passato è vuoto");
             }
+            _titolo = value;
         } 
     }
     public DateOnly Data
@@ -25,10 +26,11 @@ public class Evento {
         }
         set
         {
-            //if (_data >= DateOnly.FromDateTime(DateTime.Now))
-            //{
-            _data = value;
-            //}
+            if (value <= DateOnly.FromDateTime(DateTime.Now))
+            {
+                throw new GestoreEventiException("La data passata è antecedente a quella attuale");
+            }
+            _data = value;           
         }
     }
     public int PostiMax { get; }
@@ -39,18 +41,19 @@ public class Evento {
     {
         Titolo = titolo;
         Data = data;
-        if (postiMax > 0)
+        if (postiMax < 0 )
         {
-            PostiMax = postiMax;
+            throw new GestoreEventiException("Inserire un numero maggiore a zero");
         }
+        PostiMax = postiMax;
         PostiPrenotati = 0;
     }
 
     //metodi
     public int PrenotaPosti(int inputPrenotazioni)
     {
-        //se posti disponibili sono <= dei posti tot ok
-        //DA AGGIUNGERE se data non è passata
+        //se posti disponibili sono >= dei posti tot
+        //se data non è passata
         if ((PostiMax - PostiPrenotati) >= inputPrenotazioni && Data >= DateOnly.FromDateTime(DateTime.Now))
         {
             return PostiPrenotati += inputPrenotazioni;
@@ -74,10 +77,8 @@ public class Evento {
         }
     }
 
-
     public override string ToString()
     {
-        //metodo che si occuperà di ritornare una stringa dalla data dell'evento
-        return "{0} - {1}";
+        return Data + " - " + Titolo;
     }
 }
