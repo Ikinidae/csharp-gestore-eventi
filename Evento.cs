@@ -1,9 +1,4 @@
-﻿
-
-
-
-
-//classe evento
+﻿//classe evento
 public class Evento {
     
     //attributi
@@ -30,10 +25,10 @@ public class Evento {
         }
         set
         {
-            if (_data >= DateOnly.FromDateTime(DateTime.Now))
-            {
-                _data = value;
-            }
+            //if (_data >= DateOnly.FromDateTime(DateTime.Now))
+            //{
+            _data = value;
+            //}
         }
     }
     public int PostiMax { get; }
@@ -55,8 +50,8 @@ public class Evento {
     public int PrenotaPosti(int inputPrenotazioni)
     {
         //se posti disponibili sono <= dei posti tot ok
-        //se data non è passata
-        if ((PostiMax - PostiPrenotati) >= inputPrenotazioni )
+        //DA AGGIUNGERE se data non è passata
+        if ((PostiMax - PostiPrenotati) >= inputPrenotazioni && Data >= DateOnly.FromDateTime(DateTime.Now))
         {
             return PostiPrenotati += inputPrenotazioni;
         }
@@ -66,15 +61,23 @@ public class Evento {
         }
     }
 
-    public int DisdiciPosti()
+    public int DisdiciPosti(int inputDisdici)
     {
         //metodo che si occuperà di gestire i posti cancellati ad un evento
-        return 0;
+        if ((PostiPrenotati - inputDisdici) >= 0 && Data >= DateOnly.FromDateTime(DateTime.Now))
+        {
+            return PostiPrenotati -= inputDisdici;
+        }
+        else
+        {
+            return 0;
+        }
     }
+
 
     public override string ToString()
     {
         //metodo che si occuperà di ritornare una stringa dalla data dell'evento
-        return "data - titolo";
+        return "{0} - {1}";
     }
 }
