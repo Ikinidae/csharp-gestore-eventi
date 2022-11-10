@@ -42,6 +42,7 @@ void menu(ProgrammaEventi programmaEventi)
     Console.WriteLine("5: Visualizza numero totale di eventi");
     Console.WriteLine("6: Svuota lista");
     Console.WriteLine("7: Stampa un programma eventi");
+    Console.WriteLine("8: Aggiungi una conferenza al tuo programma eventi");
     int action = Convert.ToInt32(Console.ReadLine());
 
     switch (action)
@@ -149,6 +150,30 @@ void menu(ProgrammaEventi programmaEventi)
             //stampa programma eventi
             programmaEventi.NomeProgrammaEventi(programmaEventi);
             funzioneCase(programmaEventi);
+            break;
+
+        case 8:
+            //aggiungi conferenza
+            Console.Write("Per creare una nuova conferenza inserire nome conferenza: ");
+            string nomeConferenza = Console.ReadLine();
+
+            Console.Write("Inserire data conferenza (gg/mm/yyyy): ");
+            DateOnly dataConferenza = DateOnly.Parse((Console.ReadLine()));
+
+            Console.Write("Inserire numero posti max evento: ");
+            int postiMaxConferenza = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Inserire nome relatore: ");
+            string nomeRelatoreConferenza = Console.ReadLine();
+
+            Console.Write("Inserire prezzo: ");
+            double prezzoConferenza = Convert.ToDouble(Console.ReadLine());
+
+            Evento newEvento = new Conferenza(nomeConferenza, dataConferenza, postiMaxConferenza, nomeRelatoreConferenza, prezzoConferenza);
+            programmaEventi.AggiungiEvento(newEvento);
+
+            funzioneCase(programmaEventi);
+
             break;
     }
 }

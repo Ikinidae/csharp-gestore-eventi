@@ -37,7 +37,6 @@
         {
             Console.WriteLine("---------");
             Console.WriteLine("nome evento: {0} \n data evento: {1} \n numero posti max: {2} \n posti prenotati: {3} \n posti rimanenti: {4}\n", evento.Titolo, evento.Data, evento.PostiMax, evento.PostiPrenotati, (evento.PostiMax - evento.PostiPrenotati));
-
         }
         Console.WriteLine();
     }
