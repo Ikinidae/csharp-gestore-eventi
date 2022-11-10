@@ -46,7 +46,7 @@ public class Evento {
             throw new GestoreEventiException("Inserire un numero maggiore a zero");
         }
         PostiMax = postiMax;
-        PostiPrenotati = 10;
+        PostiPrenotati = 0;
     }
 
     //metodi
