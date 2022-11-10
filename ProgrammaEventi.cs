@@ -16,16 +16,18 @@
         Eventi.Add(evento);
     }
 
-    public void ListaEventiPerData (DateOnly dataScelta)
+    public List<Evento> ListaEventiPerData (DateOnly dataScelta)
     {
         Console.WriteLine("Gli eventi disponibili nella data scelta sono:");
+        List<Evento> listaEventiFiltrati = new List<Evento>();
         foreach (Evento evento in Eventi)
         {
             if (dataScelta == evento.Data)
             {
-                Console.WriteLine(evento.Titolo);
+                listaEventiFiltrati.Add(evento);
             }
         }
+        return listaEventiFiltrati;
     }
 
     public static void ListaEventi(List<Evento> Eventi)
@@ -34,7 +36,7 @@
         foreach (Evento evento in Eventi)
         {
             Console.WriteLine("---------");
-            Console.WriteLine("nome evento: {0} \n data evento: {1} \n numero posti max: {2} \n posti prenotati: {3} \n posti rimanenti: {4}", evento.Titolo, evento.Data, evento.PostiMax, evento.PostiPrenotati, (evento.PostiMax - evento.PostiPrenotati));
+            Console.WriteLine("nome evento: {0} \n data evento: {1} \n numero posti max: {2} \n posti prenotati: {3} \n posti rimanenti: {4}\n", evento.Titolo, evento.Data, evento.PostiMax, evento.PostiPrenotati, (evento.PostiMax - evento.PostiPrenotati));
 
         }
         Console.WriteLine();
@@ -47,22 +49,22 @@
         {
             tot += 1;
         }
-        Console.WriteLine("Il numero totale di eventi salvati è: {0}", tot);
+        Console.WriteLine("Il numero totale di eventi salvati è: {0}\n", tot);
     }
 
     public void SvuotaLista ()
     {
         Eventi.Clear();
-        Console.WriteLine("La lista è stata svuotata");
+        Console.WriteLine("La lista è stata svuotata\n");
     }
 
     public void NomeProgrammaEventi (ProgrammaEventi programmaEventi)
     {
-        Console.WriteLine("Nome programma eventi" + programmaEventi.Titolo);
+        Console.WriteLine("Nome programma eventi {0}", programmaEventi.Titolo);
         foreach (Evento evento in Eventi)
         {
             Console.WriteLine(evento.ToString());           
         }
-
+        Console.WriteLine("");
     }
 }
